@@ -72,6 +72,14 @@ with rd_average.py. It takes 2 arguments:
 
     For ex: 'bpg,mozjpeg,flif,vp9'.
 
+## Dependencies
+
+ - ImageMagick
+ - ffmpeg
+ - pandas
+ - numpy
+ - matplotlib
+
 ## Licensing
 
 The code is licensed under BSD Clause 3.
