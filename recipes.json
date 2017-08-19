@@ -1,0 +1,114 @@
+{
+    "recipes": {
+        "av1-20170809": {
+            "quality_start": 4,
+            "quality_end": 63,
+            "quality_step": 1,
+            "encode_extension": "webm",
+            "decode_extension": "y4m",
+            "encode_cmd": "aomenc --passes=2 --end-usage=q --cq-level=$quality -o $target $origpng_y4m",
+            "lossless_cmd": "aomenc --passes=2 --lossless=1 -o $target $origpng_y4m",
+            "decode_cmd": "aomdec $target -o $target_dec",
+            "export_to_png": true
+        },
+        "bpg": {
+            "quality_start": 1,
+            "quality_end": 51,
+            "quality_step": 1,
+            "encode_extension": "bpg",
+            "decode_extension": "png",
+            "encode_cmd": "bpgenc -m 8 -f 420 -q $quality -o $target $origpng",
+            "lossless_cmd": "bpgenc -m 8 -f 420 -lossless -o $target $origpng",
+            "decode_cmd": "bpgdec -o $target_dec $target",
+            "export_to_png": false
+        },
+        "daala": {
+            "quality_start": 5,
+            "quality_end": 85,
+            "quality_step": 1,
+            "encode_extension": "ogv",
+            "decode_extension": "y4m",
+            "encode_cmd": "encoder_example -v $quality -o $target $origpng_y4m",
+            "lossless_cmd": "encoder_example -v 0 -o $target $origpng_y4m",
+            "decode_cmd": "dump_video -o $target_dec $target",
+            "export_to_png": true
+        },
+        "flif": {
+            "quality_start": -329,
+            "quality_end": 79,
+            "quality_step": 12,
+            "encode_extension": "flif",
+            "decode_extension": "png",
+            "encode_cmd": "flif -Q $quality $origpng $target",
+            "lossless_cmd": "flif --overwrite -Q 100 $origpng $target",
+            "decode_cmd": "flif --overwrite $target $target_dec",
+            "export_to_png": true
+        },
+        "jxr": {
+            "quality_start": 5,
+            "quality_end": 85,
+            "quality_step": 1,
+            "encode_extension": "jxr",
+            "decode_extension": "ppm",
+            "encode_cmd": "JxrEncApp -d 1 -q $quality -o $target -i $origpng_ppm",
+            "lossless_cmd": "JxrEncApp -d 1 -q 1 -o $target -i $origpng_ppm",
+            "decode_cmd": "JxrDecApp -o $target_dec -i $target",
+            "export_to_png": false
+        },
+        "kdu": {
+            "quality_start": 38912,
+            "quality_end": 45056,
+            "quality_step": 64,
+            "encode_extension": "jp2",
+            "decode_extension": "ppm",
+            "encode_cmd": "kdu_compress -no_info -slope $quality -o $target -i $origpng_ppm",
+            "lossless_cmd": "kdu_compress -no_info Creversible=yes -slope 0 -o $target -i $origpng_ppm",
+            "decode_cmd": "kdu_expand -o $target_dec -i $target",
+            "export_to_png": false
+        },
+        "mozjpeg": {
+            "quality_start": 5,
+            "quality_end": 95,
+            "quality_step": 1,
+            "encode_extension": "jpg",
+            "decode_extension": "ppm",
+            "encode_cmd": "cjpeg -quality $quality -outfile $target $origpng_ppm",
+            "lossless_cmd": "cjpeg -rgb -quality 100 -outfile $target $origpng_ppm",
+            "decode_cmd": "djpeg -outfile $target_dec $target",
+            "export_to_png": false
+        },
+        "openjpeg": {
+            "quality_start": 5,
+            "quality_end": 165,
+            "quality_step": 5,
+            "encode_extension": "jp2",
+            "decode_extension": "ppm",
+            "encode_cmd": "opj_compress -r $quality -o $target -i $origpng_ppm",
+            "lossless_cmd": "opj_compress -r 1 -o $target -i $origpng_ppm",
+            "decode_cmd": "opj_decompress -i $target -o $target_dec",
+            "export_to_png": false
+        },
+        "vp9": {
+            "quality_start": 4,
+            "quality_end": 63,
+            "quality_step": 1,
+            "encode_extension": "webm",
+            "decode_extension": "y4m",
+            "encode_cmd": "vpxenc --tile-columns=4 --row-mt=1 --cpu-used=2 --end-usage=q --cq-level=$quality -o $target $origpng_y4m",
+            "lossless_cmd": "vpxenc --tile-columns=4 --row-mt=1 --cpu-used=2 --lossless=1 -o $target $origpng_y4m",
+            "decode_cmd": "vpxdec $target -o $target_dec",
+            "export_to_png": true
+        },
+        "webp": {
+            "quality_start": 0,
+            "quality_end": 95,
+            "quality_step": 1,
+            "encode_extension": "webp",
+            "decode_extension": "png",
+            "encode_cmd": "cwebp -mt -q $quality -o $target $origpng",
+            "lossless_cmd": "cwebp -mt -z 9 -lossless -o $target $origpng",
+            "decode_cmd": "dwebp -o $target_dec $target",
+            "export_to_png": false
+        }
+    }
+}
