@@ -318,9 +318,10 @@ def get_lossy_results(subset_name, origpng, width, height, format,
 def process_image(args):
     [format, format_recipe, subset_name, origpng] = args
 
-    if os.path.isfile("results/" + subset_name + "/" + format + "/lossy/" +
+    result_file = "results/" + subset_name + "/" + format + "/lossy/" +
                       os.path.splitext(os.path.basename(origpng))[0] + "." +
-                      format + ".out"):
+                      format + ".out"
+    if os.path.isfile(result_file) or os.stat(result_file).st_size == 0:
         return
 
     try:
