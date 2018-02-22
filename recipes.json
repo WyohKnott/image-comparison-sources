@@ -11,16 +11,27 @@
             "decode_cmd": "aomdec $target -o $target_dec",
             "export_to_png": true
         },
+        "av1-20160930": {
+                "quality_start": 4,
+                "quality_end": 63,
+                "quality_step": 1,
+                "encode_extension": "webm",
+                "decode_extension": "y4m",
+                "encode_cmd": "aomenc --passes=2 --end-usage=q --cq-level=$quality -o $target $origpng_y4m",
+                "lossless_cmd": "aomenc --passes=2 --lossless=1 -o $target $origpng_y4m",
+                "decode_cmd": "aomdec $target -o $target_dec",
+                "export_to_png": true
+        },        
         "bpg": {
-            "quality_start": 1,
-            "quality_end": 51,
-            "quality_step": 1,
-            "encode_extension": "bpg",
-            "decode_extension": "png",
-            "encode_cmd": "bpgenc -m 8 -f 420 -q $quality -o $target $origpng",
-            "lossless_cmd": "bpgenc -m 8 -f 420 -lossless -o $target $origpng",
-            "decode_cmd": "bpgdec -o $target_dec $target",
-            "export_to_png": false
+                "quality_start": 1,
+                "quality_end": 51,
+                "quality_step": 1,
+                "encode_extension": "bpg",
+                "decode_extension": "png",
+                "encode_cmd": "bpgenc -m 8 -f 420 -q $quality -o $target $origpng",
+                "lossless_cmd": "bpgenc -m 8 -f 420 -lossless -o $target $origpng",
+                "decode_cmd": "bpgdec -o $target_dec $target",
+                "export_to_png": false
         },
         "daala": {
             "quality_start": 5,
@@ -87,6 +98,17 @@
             "lossless_cmd": "opj_compress -r 1 -o $target -i $origpng_ppm",
             "decode_cmd": "opj_decompress -i $target -o $target_dec",
             "export_to_png": false
+        },
+        "pik": {
+            "quality_start": 0.5,
+            "quality_end": 3.25,
+            "quality_step": 0.25,
+            "encode_extension": "pik",
+            "decode_extension": "png",
+            "encode_cmd": "cpik $origpng $target --distance $quality",
+            "lossless_cmd": "cpik $origpng $target --distance 0.5",
+            "decode_cmd": "dpik $target $target_dec",
+            "export_to_png": true
         },
         "vp9": {
             "quality_start": 4,

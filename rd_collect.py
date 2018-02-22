@@ -42,6 +42,7 @@ import string
 import json
 from multiprocessing import Pool
 from timeit import Timer
+import numpy as np
 
 # Paths to various programs and config files used by the tests #
 # Conversion
@@ -318,16 +319,23 @@ def get_lossy_results(subset_name, origpng, width, height, format,
 def process_image(args):
     [format, format_recipe, subset_name, origpng] = args
 
-    result_file = "results/" + subset_name + "/" + format + "/lossy/" +
-                      os.path.splitext(os.path.basename(origpng))[0] + "." +
-                      format + ".out"
-    if os.path.isfile(result_file) or os.stat(result_file).st_size == 0:
+    result_file = "results/" + subset_name + "/" + format + "/lossy/" + \
+        os.path.splitext(os.path.basename(origpng))[0] + "." + format + ".out"
+    if os.path.isfile(result_file) and not os.stat(result_file).st_size == 0:
         return
 
+
     try:
-        start = int(format_recipe['quality_start'])
-        end = int(format_recipe['quality_end'])
-        step = int(format_recipe['quality_step'])
+        isfloat = isinstance(format_recipe['quality_start'], float) or isinstance(format_recipe['quality_end'], float) or isinstance(format_recipe['quality_step'], float)
+        
+        if isfloat:
+            start = float(format_recipe['quality_start'])
+            end = float(format_recipe['quality_end'])
+            step = float(format_recipe['quality_step'])
+        else:
+            start = int(format_recipe['quality_start'])
+            end = int(format_recipe['quality_end'])
+            step = int(format_recipe['quality_step'])
     except ValueError:
         print('There was an error parsing the format recipe.')
         return
@@ -377,8 +385,10 @@ def process_image(args):
     file.write(
         "file_name:quality:orig_file_size:compressed_file_size:pixels:bpp:compression_ratio:encode_time:decode_time:y_ssim_score:rgb_ssim_score:msssim_score:psnrhvsm_score:vmaf_score\n"
     )
-
-    quality_list = list(range(start, end, step))
+    if isfloat:
+        quality_list = list(np.arange(start, end, step))
+    else:
+        quality_list = list(range(start, end, step))
 
     i = 0
     while i < len(quality_list):
@@ -389,7 +399,7 @@ def process_image(args):
                                     format, format_recipe, quality)
         bpp = results[0] * 8 / pixels
         compression_ratio = orig_file_size / results[0]
-        file.write("%s:%d:%d:%d:%d:%f:%f:%f:%f:%f:%f:%f:%f:%f\n" %
+        file.write("%s:%f:%d:%d:%d:%f:%f:%f:%f:%f:%f:%f:%f:%f\n" %
                    (os.path.splitext(os.path.basename(origpng))[0], quality,
                     orig_file_size, results[0], pixels, bpp, compression_ratio,
                     results[1], results[2], results[3], results[4], results[5],
