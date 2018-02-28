@@ -186,7 +186,7 @@ def main(argv):
         print("       Default to mozjpeg")
         return
 
-    results_folder = argv[1]
+    results_folder = os.path.normpath(argv[1])
     available_formats = next(os.walk(results_folder))[1]
 
     # Check is there is actually results files in the path provided

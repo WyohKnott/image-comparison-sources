@@ -277,7 +277,7 @@ def main(argv):
 
     Pool().map(process_image, [(format, data['recipes'][format], subset_name,
                                 origpng)
-                               for origpng in glob.glob(argv[3] + "/*.png")])
+                               for origpng in glob.glob(os.path.normpath(argv[3]) + "/*.png")])
 
 
 if __name__ == "__main__":

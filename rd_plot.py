@@ -161,7 +161,7 @@ def generate_plots(path, requested_formats):
     plt.ylabel("Time (s)")
     plt.xscale("log")
     plt.xlim([0.1, 2])
-    plt.ylim([0, 200])
+    plt.ylim([0, 25])
     plt.grid(which="both")
     for format in data:
         plt.plot(
@@ -187,7 +187,7 @@ def main(argv):
             "       For ex: rd_average.py \"results/subset1\" \"bpg,mozjpeg,flif,vp9\""
         )
 
-    results_folder = argv[1]
+    results_folder = os.path.normpath(argv[1])
 
     if (not os.path.isdir(results_folder)
             or not glob.glob(results_folder + "/*.lossy.out")):

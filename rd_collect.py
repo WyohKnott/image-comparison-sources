@@ -340,11 +340,11 @@ def process_image(args):
         print('There was an error parsing the format recipe.')
         return
 
-    if (not format_recipe['encode_extension']
-            or not format_recipe['decode_extension']
-            or not format_recipe['encode_cmd']
-            or not format_recipe['lossless_cmd']
-            or not format_recipe['decode_cmd']):
+    if (not 'encode_extension' in format_recipe
+            or not 'decode_extension' in format_recipe
+            or not 'encode_cmd' in format_recipe
+            or not 'lossless_cmd' in format_recipe
+            or not 'decode_cmd' in format_recipe):
         print('There was an error parsing the format recipe.')
         return
 
@@ -438,7 +438,8 @@ def main(argv):
             supported_formats))
         return
 
-    Pool().map(process_image, [(format, data['recipes'][format], subset_name,
+    pool = Pool(processes=1)
+    pool.map(process_image, [(format, data['recipes'][format], subset_name,
                                 origpng)
                                for origpng in glob.glob(argv[3] + "/*.png")])
 
