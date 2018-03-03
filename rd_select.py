@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Copyright 2017 Wyoh Knott
+# Copyright 2017-2018 Wyoh Knott
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:

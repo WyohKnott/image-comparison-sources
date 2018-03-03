@@ -79,6 +79,8 @@ with rd_average.py. It takes 2 arguments:
  - pandas
  - numpy
  - matplotlib
+ - six
+ - pytablewriter
 
 ## Licensing
 

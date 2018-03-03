@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Copyright 2017 Wyoh Knott
+# Copyright 2017-2018 Wyoh Knott
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -49,6 +49,7 @@ def generate_plots(path, requested_formats):
     plt.rcParams['svg.fonttype'] = 'svgfont'
 
     # Y-SSIM
+    fig = plt.figure()
     plt.figure(figsize=(25, 15))
     plt.title(
         "Quality according to Y-SSIM in function of number of bits per pixel")
@@ -58,7 +59,8 @@ def generate_plots(path, requested_formats):
     plt.xscale("log")
     plt.xlim([0.1, 2])
     plt.ylim([10, 20])
-    plt.grid(which="both")
+    plt.minorticks_on()
+    plt.grid(b=True, which='both', color='0.65', linestyle='--')
     for format in data:
         plt.plot(
             data[format]["avg_bpp"],
@@ -67,9 +69,10 @@ def generate_plots(path, requested_formats):
     plt.legend()
     plt.savefig(path + "/" + subset_name + ".y-ssim.(" +
                 ','.join(requested_formats) + ").svg")
+    plt.close(fig)
 
     # RGB-SSIM
-    plt.figure(1)
+    fig = plt.figure()
     plt.figure(figsize=(25, 15))
     plt.title(
         "Quality according to RGB-SSIM in function of number of bits per pixel"
@@ -80,7 +83,8 @@ def generate_plots(path, requested_formats):
     plt.xscale("log")
     plt.xlim([0.1, 2])
     plt.ylim([10, 20])
-    plt.grid(which="both")
+    plt.minorticks_on()
+    plt.grid(b=True, which='both', color='0.65', linestyle='--')
     for format in data:
         plt.plot(
             data[format]["avg_bpp"],
@@ -89,9 +93,10 @@ def generate_plots(path, requested_formats):
     plt.legend()
     plt.savefig(path + "/" + subset_name + ".rgb-ssim.(" +
                 ','.join(requested_formats) + ").svg")
+    plt.close(fig)
 
     # MS-SSIM
-    plt.figure(2)
+    fig = plt.figure()
     plt.figure(figsize=(25, 15))
     plt.title(
         "Quality according to MS-SSIM in function of number of bits per pixel")
@@ -101,7 +106,8 @@ def generate_plots(path, requested_formats):
     plt.xscale("log")
     plt.xlim([0.1, 2])
     plt.ylim([15, 35])
-    plt.grid(which="both")
+    plt.minorticks_on()
+    plt.grid(b=True, which='both', color='0.65', linestyle='--')
     for format in data:
         plt.plot(
             data[format]["avg_bpp"],
@@ -110,8 +116,9 @@ def generate_plots(path, requested_formats):
     plt.legend()
     plt.savefig(path + "/" + subset_name + ".ms-ssim.(" +
                 ','.join(requested_formats) + ").svg")
+    plt.close(fig)
 
-    plt.figure(3)
+    fig = plt.figure()
     plt.figure(figsize=(25, 15))
     plt.title(
         "Quality according to PSNR-HVS-M in function of number of bits per pixel"
@@ -122,7 +129,8 @@ def generate_plots(path, requested_formats):
     plt.xscale("log")
     plt.xlim([0.1, 2])
     plt.ylim([25, 50])
-    plt.grid(which="both")
+    plt.minorticks_on()
+    plt.grid(b=True, which='both', color='0.65', linestyle='--')
     for format in data:
         plt.plot(
             data[format]["avg_bpp"],
@@ -131,8 +139,9 @@ def generate_plots(path, requested_formats):
     plt.legend()
     plt.savefig(path + "/" + subset_name + ".psnr-hvs-m.(" +
                 ','.join(requested_formats) + ").svg")
+    plt.close(fig)
 
-    plt.figure(4)
+    fig = plt.figure()
     plt.figure(figsize=(25, 15))
     plt.title(
         "Quality according to VMAF in function of number of bits per pixel")
@@ -142,7 +151,8 @@ def generate_plots(path, requested_formats):
     plt.xscale("log")
     plt.xlim([0.1, 2])
     plt.ylim([75, 100])
-    plt.grid(which="both")
+    plt.minorticks_on()
+    plt.grid(b=True, which='both', color='0.65', linestyle='--')
     for format in data:
         plt.plot(
             data[format]["avg_bpp"],
@@ -152,8 +162,9 @@ def generate_plots(path, requested_formats):
     plt.savefig("test.svg")
     plt.savefig(path + "/" + subset_name + ".vmaf.(" +
                 ','.join(requested_formats) + ").svg")
+    plt.close(fig)
 
-    plt.figure(5)
+    fig = plt.figure()
     plt.figure(figsize=(25, 15))
     plt.title("Encoding time in function of average bpp")
     plt.suptitle(subset_name)
@@ -162,7 +173,8 @@ def generate_plots(path, requested_formats):
     plt.xscale("log")
     plt.xlim([0.1, 2])
     plt.ylim([0, 25])
-    plt.grid(which="both")
+    plt.minorticks_on()
+    plt.grid(b=True, which='both', color='0.65', linestyle='--')
     for format in data:
         plt.plot(
             data[format]["avg_bpp"],
@@ -172,6 +184,9 @@ def generate_plots(path, requested_formats):
     plt.savefig("test.svg")
     plt.savefig(path + "/" + subset_name + ".encoding_time.(" +
                 ','.join(requested_formats) + ").svg")
+    plt.close(fig)
+    
+    plt.close("all")
 
 
 def main(argv):

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Copyright 2013, Mozilla Corporation
-# Copyright 2017, Wyoh Knott
+# Copyright 2017-2018 Wyoh Knott
 # Loosely based on a script written by Josh Aas
 # https://github.com/bdaehlie/web_image_formats
 #
