@@ -159,7 +159,6 @@ def generate_plots(path, requested_formats):
             data[format]["wavg_vmaf_score"],
             label=format)
     plt.legend()
-    plt.savefig("test.svg")
     plt.savefig(path + "/" + subset_name + ".vmaf.(" +
                 ','.join(requested_formats) + ").svg")
     plt.close(fig)
@@ -181,7 +180,6 @@ def generate_plots(path, requested_formats):
             data[format]["wavg_encode_time"],
             label=format)
     plt.legend()
-    plt.savefig("test.svg")
     plt.savefig(path + "/" + subset_name + ".encoding_time.(" +
                 ','.join(requested_formats) + ").svg")
     plt.close(fig)
