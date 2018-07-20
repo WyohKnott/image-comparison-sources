@@ -19,7 +19,7 @@ for subset in next(os.walk("comparisonfiles/"))[1]:
             os.path.splitext(os.path.basename(fn))[1][1:]
             for fn in glob.glob(
                 "comparisonfiles/" + subset + "/large/" + format + "/*")
-            if os.path.splitext(os.path.basename(fn))[1] != "png"
+            if os.path.splitext(os.path.basename(fn))[1] != ".png"
         ][0]
         data['comparisonfiles'][subset]["format"].append({
             "extension": extension,
